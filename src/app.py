@@ -1,3 +1,9 @@
+"""
+Author: Asher Adighije
+Date: 03/10/2024
+Description: This is the main application file for the AAPL Stock Data Viewer.
+
+"""
 import streamlit as st
 from fetch_data import load_data
 
