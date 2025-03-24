@@ -1,7 +1,7 @@
 import pytest
 import os
 import json
-from fetch_data import load_data
+from src.fetch_data import load_data # Import the function to be tested
 
 def test_load_data():
     """Test that data loads correctly from JSON file."""
