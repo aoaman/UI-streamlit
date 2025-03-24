@@ -1,30 +1,29 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
 from fetch_data import load_data
 
-st.title("Chart View 📈")
+def chart_view():
+    """
+    Display stock data using Streamlit's built-in charting functions.
+    """
+    st.title("Stock Data - Chart View")
 
-data = load_data()
+    data = load_data()
+    if not data:
+        st.error("No data available. Please fetch the latest stock data.")
+        return
 
-if data and "data" in data and "tradesTable" in data["data"]:
-    table_data = data["data"]["tradesTable"]["rows"]
+    # Convert data to a DataFrame
+    rows = data["data"]["tradesTable"]["rows"]
+    df = pd.DataFrame(rows)
 
-    # Convert to Pandas DataFrame
-    df = pd.DataFrame(table_data)
-    
-    # Convert columns to appropriate types
+    # Convert numeric values
     df["date"] = pd.to_datetime(df["date"])
     df["close"] = df["close"].str.replace("$", "").astype(float)
+    df = df.sort_values("date")
 
-    # Plot Close Prices over time
-    fig, ax = plt.subplots()
-    ax.plot(df["date"], df["close"], marker="o", linestyle="-", label="Close Price")
-    ax.set_xlabel("Date")
-    ax.set_ylabel("Close Price (USD)")
-    ax.set_title("AAPL Stock Price Over Time")
-    ax.legend()
+    # Use Streamlit's built-in line chart
+    st.line_chart(df.set_index("date")["close"])
 
-    st.pyplot(fig)
-else:
-    st.error("No data available.")
+if __name__ == "__main__":
+    chart_view()
