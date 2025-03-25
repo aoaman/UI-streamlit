@@ -1,3 +1,7 @@
+"""
+Table View Page
+Author: Asher Adighije
+"""
 import streamlit as st
 from fetch_data import load_data
 

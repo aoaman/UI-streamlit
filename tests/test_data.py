@@ -9,7 +9,17 @@ import json
 from src.fetch_data import load_data # Import the function to be tested
 
 def test_load_data() -> None:
-    """Test that data loads correctly from JSON file."""
+    """    
+    Test that stock data loads correctly from the JSON file.
+
+    Ensures:
+        - The loaded data is a dictionary.
+        - The expected structure exists within the JSON data.
+        - There is at least one row of stock data.
+
+    Raises:
+        AssertionError: If any of the expected conditions fail.
+    """
     data = load_data()
     
     # Ensure data is a dictionary
@@ -24,7 +34,17 @@ def test_load_data() -> None:
     assert len(data["data"]["tradesTable"]["rows"]) > 0, "No stock data found"
 
 def test_data_values() -> None:
-    """Test that stock price values are correctly formatted."""
+    """
+    Test that stock price values are correctly formatted.
+
+    Ensures:
+        - 'date' is a string.
+        - 'close', 'open', 'high', and 'low' prices start with '$'.
+        - 'volume' contains a comma for proper formatting.
+
+    Raises:
+        AssertionError: If any value does not meet the expected format.
+    """
     data = load_data()
     rows = data["data"]["tradesTable"]["rows"]
 
@@ -39,5 +59,12 @@ def test_data_values() -> None:
         assert "," in row["volume"], "Volume should be formatted with a comma"
 
 def test_json_file_exists() -> None:
-    """Ensure that the JSON data file is created."""
+    """
+    Ensure that the JSON data file exists after fetching data.
+
+    This verifies that the fetch_data module correctly creates and saves the stock data file.
+
+    Raises:
+        AssertionError: If the JSON file is not found.
+    """
     assert os.path.exists("data/aapl_data.json"), "JSON file not found"

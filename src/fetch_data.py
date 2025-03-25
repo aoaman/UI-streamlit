@@ -11,7 +11,13 @@ DATA_FILE = "data/aapl_data.json"
 API_URL = "https://api.nasdaq.com/api/quote/AAPL/historical?assetclass=stocks&fromdate=2020-02-05&limit=9999"
 
 def download_data() -> dict | None:
-    """Fetches data from the API and saves it locally."""
+    """
+    Fetch stock data from the NASDAQ API and save it locally.
+
+    Returns:
+        dict: The fetched stock data if successful.
+        None: If an error occurs during the fetch or if the data format is invalid.
+    """
     headers = {
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
     }
@@ -41,7 +47,13 @@ def download_data() -> dict | None:
 
 @st.cache_data(ttl=60*10)  # Cache the data for 10 minutes
 def load_data() -> dict | None:
-    """Loads stock data from the local JSON file, downloading if necessary."""
+    """
+    Load stock data from the local JSON file. If missing, fetch from the API.
+
+    Returns:
+        dict: The stock data if successfully loaded.
+        None: If the file is missing, corrupt, or cannot be loaded properly.
+    """
     if not os.path.exists(DATA_FILE):
         st.warning("No local data found. Fetching from API...", icon="⏳")
         return download_data()

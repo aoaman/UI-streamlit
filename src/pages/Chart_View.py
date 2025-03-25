@@ -1,10 +1,20 @@
+"""
+Chart View Page
+Author: Asher Adighije
+"""
 import streamlit as st
 import pandas as pd
 from fetch_data import load_data
 
 def chart_view() -> None:
     """
-    Display stock data using Streamlit's built-in charting functions with a year range filter.
+    Display an interactive stock price chart using Streamlit with a year range filter.
+
+    Loads stock data from a local JSON file, allows the user to select a date range,
+    and renders a line chart of closing prices.
+
+    Returns:
+        None: The function renders the chart directly in the Streamlit app.
     """
     st.title("Stock Data - Chart View")
 

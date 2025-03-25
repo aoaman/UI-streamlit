@@ -1,3 +1,7 @@
+"""
+Statistics View Page
+Author: Asher Adighije
+"""
 import streamlit as st
 import pandas as pd
 from fetch_data import load_data
