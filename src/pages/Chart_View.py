@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 from fetch_data import load_data
 
-def chart_view():
+def chart_view() -> None:
     """
     Display stock data using Streamlit's built-in charting functions with a year range filter.
     """

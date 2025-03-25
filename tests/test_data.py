@@ -1,9 +1,14 @@
+"""
+This module contains tests for the fetch_data.py module.
+Author: Asher Adighije
+
+"""
 import pytest
 import os
 import json
 from src.fetch_data import load_data # Import the function to be tested
 
-def test_load_data():
+def test_load_data() -> None:
     """Test that data loads correctly from JSON file."""
     data = load_data()
     
@@ -18,7 +23,7 @@ def test_load_data():
     # Ensure there are rows of data
     assert len(data["data"]["tradesTable"]["rows"]) > 0, "No stock data found"
 
-def test_data_values():
+def test_data_values() -> None:
     """Test that stock price values are correctly formatted."""
     data = load_data()
     rows = data["data"]["tradesTable"]["rows"]
@@ -33,6 +38,6 @@ def test_data_values():
         assert row["low"].startswith("$"), "Low price should start with '$'"
         assert "," in row["volume"], "Volume should be formatted with a comma"
 
-def test_json_file_exists():
+def test_json_file_exists() -> None:
     """Ensure that the JSON data file is created."""
     assert os.path.exists("data/aapl_data.json"), "JSON file not found"

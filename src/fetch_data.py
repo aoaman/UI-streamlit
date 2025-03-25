@@ -1,3 +1,7 @@
+"""
+This module fetches and caches stock data from the NASDAQ API.
+Author: Asher Adighije
+"""
 import os
 import json
 import requests
@@ -6,7 +10,7 @@ import streamlit as st
 DATA_FILE = "data/aapl_data.json"
 API_URL = "https://api.nasdaq.com/api/quote/AAPL/historical?assetclass=stocks&fromdate=2020-02-05&limit=9999"
 
-def download_data():
+def download_data() -> dict | None:
     """Fetches data from the API and saves it locally."""
     headers = {
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
@@ -36,7 +40,7 @@ def download_data():
         return None
 
 @st.cache_data(ttl=60*10)  # Cache the data for 10 minutes
-def load_data():
+def load_data() -> dict | None:
     """Loads stock data from the local JSON file, downloading if necessary."""
     if not os.path.exists(DATA_FILE):
         st.warning("No local data found. Fetching from API...", icon="⏳")
