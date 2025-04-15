@@ -1,4 +1,4 @@
-# UI-streamlit
+# AAPl Stock Viewer
 
 [![Python application](https://github.com/aoaman/UI-streamlit/actions/workflows/python-app.yml/badge.svg)](https://github.com/aoaman/UI-streamlit/actions/workflows/python-app.yml)
 [![Docker](https://github.com/aoaman/UI-streamlit/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/aoaman/UI-streamlit/actions/workflows/docker-publish.yml)
